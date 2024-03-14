@@ -15,8 +15,6 @@ const personSchema = new Schema({
   favoriteFoods: [String],
 });
 
-=======
->>>>>>> cd8e517eace4b60a43e7df6a84146a4ea6833028
 let Person;
 
 Person = mongoose.model("Person", personSchema);
