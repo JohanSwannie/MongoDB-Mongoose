@@ -1,11 +1,6 @@
 require("dotenv").config();
 let mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://jswannieman:nVx6hdAEeax8sgBU@cluster0.geeaoop.mongodb.net/",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
-
 let Person;
 
 const createAndSavePerson = (done) => {
