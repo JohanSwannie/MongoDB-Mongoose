@@ -25,7 +25,18 @@ let personOne = new Person({
 });
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  let personTwo = new Person({
+    name: "Julie Swan",
+    age: 33,
+    favoriteFoods: ["Pasta", "Cheese", "Potatoes"],
+  });
+  personTwo.save((error, data) => {
+    if (error) {
+      return console.log(error);
+    } else {
+      done(null, data);
+    }
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
