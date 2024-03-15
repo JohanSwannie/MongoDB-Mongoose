@@ -39,8 +39,31 @@ const createAndSavePerson = (done) => {
   });
 };
 
+let arrayOfPeople = [
+  {
+    name: "Tommie Theron",
+    age: 40,
+    favoriteFoods: ["Mutton", "Lamb", "Chicken"],
+  },
+  {
+    name: "Petri Theron",
+    age: 55,
+    favoriteFoods: ["Lasagna", "Rice", "Corn"],
+  },
+  {
+    name: "Danie Theron",
+    age: 45,
+    favoriteFoods: ["Pizza", "Hamburgers", "Kentucky Fried Chicken"],
+  },
+];
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople, (error, data) => {
+    if (error) {
+      return console.log(error);
+    } else {
+      done(null, data);
+    }
+  });
 };
 
 const findPeopleByName = (personName, done) => {
