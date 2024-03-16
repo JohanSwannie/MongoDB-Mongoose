@@ -85,17 +85,41 @@ const findPeopleByName = (personName, done) => {
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({ favoriteFoods: food }, (error, data) => {
+    if (error) {
+      console.log(error);
+    } else {
+      done(null, data);
+    }
+  });
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, (error, data) => {
+    if (error) {
+      console.log(error);
+    } else {
+      done(null, data);
+    }
+  });
 };
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (error, person) => {
+    if (error) {
+      console.log(error);
+    } else {
+      person.favoriteFoods.push(foodToAdd);
+    }
+    person.save((error, personUpdated) => {
+      if (error) {
+        return console.log(error);
+      } else {
+        done(null, personUpdated);
+      }
+    });
+  });
 };
 
 const findAndUpdate = (personName, done) => {
