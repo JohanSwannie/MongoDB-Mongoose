@@ -1,10 +1,18 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Successfully connected to the database");
+  })
+  .catch((err) => {
+    console.log("Could not connect to the database", err);
+  });
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+console.log(mongoose.connection.readyState);
 
 const Schema = mongoose.Schema;
 
@@ -67,7 +75,13 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({ name: personName }, (error, searchPersons) => {
+    if (error) {
+      console.log(error);
+    } else {
+      done(null, searchPersons);
+    }
+  });
 };
 
 const findOneByFood = (food, done) => {
